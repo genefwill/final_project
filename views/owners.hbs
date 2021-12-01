@@ -1,0 +1,113 @@
+<div class="container col-xxl-12 px-4 py-5">
+	<div class="row justify-content-md-center flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-lg-12">
+			<h1 class="display-2 fw-bold lh-2 colored-font mb-4">Owners</h1>
+			<p class="lead font-weight-light lh-2 mb-3">Manage the Owners of Pets information</p>
+		</div>
+	</div>
+    <div class="input-group">
+        <input type="search" class="form-control rounded" placeholder="Search by Name" aria-label="Search"
+        aria-describedby="search-addon" />
+        <button type="button" class="btn btn-outline-primary">Search</button>
+    </div>
+    <div class="row justify-content-md-center flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-lg-12">
+            <table class="table table-striped">
+                {{!-- Header section --}}
+                <thead>
+
+                    {{!-- For just the first row, we print each key of the row object as a header cell so we
+                    know what each column means when the page renders --}}
+                    <tr>
+                        {{#each owners.[0]}}
+                        <th>
+                            {{@key}}
+                        </th>
+                        {{/each}}
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+              <tbody>
+                {{#each owners}}
+                <tr>
+                    <td>{{this.ownerID}}</td>
+                    <td>{{this.firstName}}</td>
+                    <td>{{this.lastName}}</td>
+                    <td>{{this.email}}</td>
+                    <td>{{this.phoneNumber}}</td>
+                    <td>{{this.address1}}</td>
+                    <td>{{this.address2}}</td>
+                    <td>{{this.city}}</td>
+                    <td>{{this.state}}</td>
+                    <td>{{this.zipCode}}</td>
+                    <td>
+                        <a href="/owners/{{this.ownerID}}">Update</a>
+                    </td>
+                    <td>
+                        <td><button onclick="deletePerson({{id}})">Delete</button></td>
+                    </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-md-left g-5 py-5">
+        <div class="col-lg-8">
+            <h2 class="display-6 fw-medium lh-2 colored-font mb-4">Add New Owner</h2>
+        </div>
+    </div>
+    <div class="row justify-content-md-left pb-5">
+        <div class="col-lg-6">
+            <form id="addOwner" action="/owners" method="post">
+                <fieldset>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-name" class="form-label">First Name</label>
+                        <input type="text" name="firstName" class="form-control" required>
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-name" class="form-label">Last Name</label>
+                        <input type="text" name="lastName" class="form-control" required>
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-email" class="form-label">Email address (optional)</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-phone" class="form-label"  >Phone Number</label>
+                        <input type="tel" name="phoneNumber" class="form-control" required>
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="inputAddress" class="form-label"  >Address Line 1</label>
+                        <input type="text" name="address1" class="form-control" required>
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="inputAddress" class="form-label"  >Address Line 2 (optional)</label>
+                        <input type="text" name="address2" class="form-control" >
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" name="city" class="form-control" >
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="state" class="form-label">State</label>
+                        <input type="text" name="state" class="form-control" required="">
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="zip" class="form-label">Zip</label>
+                        <input type="text" name="zipCode" class="form-control" required="">
+                    </div>
+                    <div class="col-lg-12 justify-content-md-left">
+                        <input type="submit" class="btn btn-primary btn-lg px-4 gap-3" value="Submit"></input>
+                    </div>
+                </fieldset>
+            </form>
+            
+        </div>
+    </div>
+
+
+
+

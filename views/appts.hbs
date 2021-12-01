@@ -1,0 +1,96 @@
+<div class="container col-xxl-12 px-4 py-5">
+    <div class="row justify-content-md-center flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-lg-12">
+            <h1 class="display-2 fw-bold lh-2 colored-font mb-4">Appointments</h1>
+            <p class="lead font-weight-light lh-2 mb-3">Current Appointments at Vet Your Pet</p>
+        </div>
+    </div>
+    <div class="row justify-content-md-center flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-lg-12">
+            <table class="table table-striped">
+              {{!-- Header section --}}
+                <thead>
+
+                    {{!-- For just the first row, we print each key of the row object as a header cell so we
+                    know what each column means when the page renders --}}
+                    <tr>
+                        {{#each appts.[0]}}
+                        <th>
+                            {{@key}}
+                        </th>
+                        {{/each}}
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+              <tbody>
+                {{#each appts}}
+                <tr>
+                    <th>{{this.apptID}}</th>
+                    <td>{{this.apptDateTime}}</td>
+                    <td>{{this.endTime}}</td>
+                    <td>{{this.reason}}</td>
+                    <td>{{this.pet}}</td>
+                    <td>{{this.vet}}</td>
+                    <td>
+                        <a href="">Update</a>
+                    </td>
+                    <td>
+                        <a href="">Delete</a>
+                    </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-md-left g-5 py-5">
+        <div class="col-lg-8">
+            <h2 class="display-6 fw-medium lh-2 colored-font mb-4">Add New Appointment</h2>
+        </div>
+    </div>
+    <div class="row justify-content-md-left pb-5">
+        <div class="col-lg-8">
+            <form action="appts" method="post">
+                <fieldset>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-apptDateTime" class="form-label">Date and Time</label>
+                        <input type="datetime-local" class="form-control" name="apptDateTime" id="apptDateTime">
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-endTime" class="form-label">End Time</label>
+                        <input type="datetime-local" class="form-control" name="endTime" id="endTime">
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-reason" class="form-label">Reason</label>
+                        <input type="reason" class="form-control" name="reason" id="input-reason">
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-pet" class="form-label">Pet (petID)</label>
+                        <select id="petID" name="petID" class="form-select form-select-lg mb-3" aria-label=".form-select-lg petID">
+                          <option selected>Open to select Pet</option>
+                            {{#each pets}}
+                                <option value={{this.pet}}>[{{this.petID}}] {{this.givenName}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-vet" class="form-label">Veterinarian (vetID)</label>
+                        <select id="vetID" name="vetID" class="form-select form-select-lg mb-3" aria-label=".form-select-lg vetID">
+                          <option selected>Open to select Vet</option>
+                            {{#each vets}}
+                                <option value={{this.vet}}>[{{this.vetID}}] {{this.name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="col-lg-12 justify-content-md-left">
+                        <input type="submit" class="btn btn-primary btn-lg px-4 gap-3" value="Add Appointment"></input>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+
+
+

@@ -1,0 +1,62 @@
+<div class="container col-xxl-12 px-4 py-5">
+    <div class="row justify-content-md-center flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-lg-12">
+            <h1 class="display-2 fw-bold lh-2 colored-font mb-4">Veterinarians</h1>
+            <p class="lead font-weight-light lh-2 mb-3">Manage the Veterinarian information</p>
+        </div>
+    </div>
+    <div class="row justify-content-md-center flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-lg-12">
+            <table class="table table-striped">
+              <tr>
+                {{#each vets.[0]}}
+                    <th>
+                        {{@key}}
+                    </th>
+                {{/each}}
+                </tr>
+              <tbody>
+                {{#each vets}}
+                <tr>
+                    <th scope="row">{{this.vetID}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.email}}</td>
+                    <td>
+                        <a href="/vets/{{this.vetID}}">Edit</a>
+                    </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-md-left g-5 py-5">
+        <div class="col-lg-8">
+            <h2 class="display-6 fw-medium lh-2 colored-font mb-4">Add New Veterinarian</h2>
+        </div>
+    </div>
+    <div class="row justify-content-md-left pb-5">
+        <div class="col-lg-8">
+            <form action="/vets" method="post">
+                <fieldset>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-name" class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control">
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-name" class="form-label">Email</label>
+                        <input type="text" name="email" class="form-control">
+                    </div>
+                    <div class="input-group-lg mb-4">
+                    <div class="col-lg-12 justify-content-md-left">
+                        <input type="submit" class="btn btn-primary btn-lg px-4 gap-3" value="Submit"></input>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+

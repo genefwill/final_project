@@ -1,0 +1,111 @@
+<div class="container col-xxl-12 px-4 py-5">
+	<div class="row justify-content-md-center flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-lg-12">
+			<h1 class="display-2 fw-bold lh-2 colored-font mb-4">Pets</h1>
+			<p class="lead font-weight-light lh-2 mb-3">Manage the Pets that are patients at the clinic</p>
+		</div>
+	</div>
+    <div class="row justify-content-md-center flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-lg-12">
+            <table class="table table-striped">
+                {{!-- Header section --}}
+                <thead>
+
+                    {{!-- For just the first row, we print each key of the row object as a header cell so we
+                    know what each column means when the page renders --}}
+                    <tr>
+                        {{#each pets.[0]}}
+                        <th>
+                            {{@key}}
+                        </th>
+                        {{/each}}
+{{!--                         <th></th>
+                        <th></th> --}}
+                    </tr>
+                </thead>
+              <tbody>
+                {{#each pets}}
+                <tr>
+                    <td>{{this.petID}}</td>
+                    <td>{{this.givenName}}</td>
+                    <td>{{this.owner}}</td>
+                    <td>{{this.species}}</td>
+                    <td>{{this.dateOfBirth}}</td>
+                    <td>{{this.sex}}</td>
+                    <td>{{this.weight}}</td>                    
+{{!--                     <td>
+                        <a href="/pets/{{this.petID}}">Update</a>
+                    </td>
+                    <td>
+                        <button onclick="deletePets({{this.petID}}">
+                            Delete
+                        </button>
+                    </td> --}}
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-md-left g-5 py-5">
+        <div class="col-lg-8">
+            <h2 class="display-6 fw-medium lh-2 colored-font mb-4">Add New Pet</h2>
+        </div>
+    </div>
+    <div class="row justify-content-md-left pb-5">
+        <div class="col-lg-8">
+            <form id="addPet" action="/pets" method="post">
+                <fieldset>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-givenName" class="form-label">Given Name</label>
+                        <input type="name" class="form-control" name="givenName" id="givenName" aria-describedby="givenName">
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-owner" class="form-label">Owner</label>
+                        <select name="owners" id="owners" class="form-select form-select-lg mb-3" aria-label=".form-select-lg species"> 
+                            <option selected>Open to select owner</option>
+                            {{#each owners}}
+                                <option value="{{this.ownerID}}">[{{ownerID}}] {{firstName}} {{lastName}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-species" class="form-label">Species</label>
+                        <select id="species" name="species" class="form-select form-select-lg mb-3" aria-label=".form-select-lg species">
+                          <option selected>Open to select species</option>
+                          <option value="Dog">Dog</option>
+                          <option value="Cat">Cat</option>
+                          <option value="Rabbit">Rabbit</option>
+                          <option value="Bunny">Bunny</option>
+                          <option value="Hamster">Hamster</option>
+                          <option value="Rats">Rats</option>
+                          <option value="Snake">Snake</option>
+                          <option value="Bird">Bird</option>
+                        </select>
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-dob" class="form-label">Date of Birth (optional)</label>
+                        <input type="date" class="form-control" name="dateOfBirth" id="dateOfBirth" aria-describedby="dateOfBirth">
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-sex" class="form-label"  >Sex</label>
+                        <select id="sex" name="sex" class="form-select form-select-lg mb-3" aria-label=".form-select-lg sex">
+                          <option selected>Open to select sex</option>
+                          <option value="F">Female</option>
+                          <option value="M">Male</option>
+                        </select>
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-weight" class="form-label"  >Weight</label>
+                        <input id="weight" type="number" class="form-control" name="weight">
+                    </div>
+                    <div class="col-lg-12 justify-content-md-left">
+                        <input type="submit" class="btn btn-primary btn-lg px-4 gap-3" value="Submit"></input>
+                    </div>
+                </fieldset>
+            </form>  
+        </div>
+    </div>
+</div>
+
+

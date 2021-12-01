@@ -1,0 +1,70 @@
+<div class="container col-xxl-12 px-4 py-5">
+    <div class="row justify-content-md-center flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-lg-12">
+            <h1 class="display-2 fw-bold lh-2 colored-font mb-4">Veterinarians and Pets</h1>
+            <p class="lead font-weight-light lh-2 mb-3">Shows the Pets that each Vet has had appointments with. The relationships in the vets and pets table would be updated based on the appointments table.</p>
+        </div>
+    </div>
+    <div class="row justify-content-md-center flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-lg-12">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                    {{#each vetsPets.[0]}}
+                        <th>
+                            {{@key}}
+                        </th>
+                    {{/each}}
+                </tr>
+              </thead>
+              <tbody>
+                {{#each vetsPets}}
+                <tr>
+                    <td>{{this.vet}}</td>
+                    <td>{{this.pet}}</td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-md-left g-5 py-5">
+        <div class="col-lg-8">
+            <h2 class="display-6 fw-medium lh-2 colored-font mb-4">Add New Veterinarian & Pet Relationship</h2>
+        </div>
+    </div>
+    <div class="row justify-content-md-left pb-5">
+        <div class="col-lg-8">
+            <form action="http://web.engr.oregonstate.edu/~zhangluy/tools/class-content/form_tests/check_request.php" method="post">
+                <fieldset>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-name" class="form-label">Veterinarian</label>
+                        <select name="vetID" id="vetID" class="form-select form-select-lg mb-3" aria-label=".form-select-lg vets"> 
+                            <option selected>Open to select veterinarian</option>
+                            {{#each vets}}
+                                <option value={{this.vet}}>[{{this.vetID}}] {{this.name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="input-group-lg mb-4">
+                        <label for="input-pet" class="form-label">Pet</label>
+                        <select name="petID" id="petID" class="form-select form-select-lg mb-3" aria-label=".form-select-lg pets"> 
+                            <option selected>Open to select pet</option>
+                            {{#each pets}}
+                                <option value={{this.pet}}>[{{this.petID}}] {{this.givenName}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="input-group-lg mb-4">
+                    <div class="col-lg-12 justify-content-md-left">
+                        <input type="submit" class="btn btn-primary btn-lg px-4 gap-3" value="Add Veterinarian and Pet"></input>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
