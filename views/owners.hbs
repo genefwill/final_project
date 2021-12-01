@@ -5,11 +5,12 @@
 			<p class="lead font-weight-light lh-2 mb-3">Manage the Owners of Pets information</p>
 		</div>
 	</div>
-    <div class="input-group">
-        <input type="search" class="form-control rounded" placeholder="Search by Name" aria-label="Search"
-        aria-describedby="search-addon" />
-        <button type="button" class="btn btn-outline-primary">Search</button>
-    </div>
+    <form id='search_owners' action='' method=''>
+    <!--- this form does not submit directly, the button handles all the interaction with backend -->
+        <label> Search people for last name starting with:</label>
+        <input id='last_name_search_string' type='text' name='last_name_search_string' value=''>
+        <input type="button" value="Search" onclick="searchOwnersByLastName()">
+    </form>
     <div class="row justify-content-md-center flex-lg-row-reverse align-items-center g-5 py-5">
         <div class="col-lg-12">
             <table class="table table-striped">
@@ -46,7 +47,7 @@
                         <a href="/owners/{{this.ownerID}}">Update</a>
                     </td>
                     <td>
-                        <td><button onclick="deletePerson({{id}})">Delete</button></td>
+                        <td><button onclick="deleteOwner({{id}})">Delete</button></td>
                     </td>
                 </tr>
                 {{/each}}

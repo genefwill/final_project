@@ -47,8 +47,37 @@ module.exports = function(){
 				res.render('owners', context);
 			}
 		}
-	})
+	});
 
+    function getOwnersWithNameLike(req, res, mysql, context, complete) {
+        //sanitize the input as well as include the % character
+         var query = "SELECT Owners.ownerID as id, firstName, lastName, email, phoneNumber, address1, address2, city, state, zipCode FROM Owners WHERE Owners.lastName LIKE " + mysql.pool.escape(req.params.s + '%');
+        console.log(query)
+  
+        mysql.pool.query(query, function(error, results, fields){
+              if(error){
+                  res.write(JSON.stringify(error));
+                  res.end();
+              }
+              context.owners = results;
+              complete();
+          });
+      }
+  
+
+    router.get('/search/:s', function(req, res){
+        var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["deleteOwner.js, searchOwners.js"];
+        var mysql = req.app.get('mysql');
+        getOwnersWithNameLike(req, res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                res.render('owners', context);
+            }
+        }
+    });
 
 	// Add a new Owner row
     // router.post('/', function(req, res){
@@ -97,38 +126,7 @@ module.exports = function(){
     });
 
     //Updating Owner
-    router.get('/:id', function(req, res){
-        callbackCount = 0;
-        var context = {};
-        context.jsscripts = ["updateOwner.js"];
-        var mysql = req.app.get('mysql');
-        getOwner(res, mysql, context, req.params.id, complete);
-        function complete(){
-            callbackCount++;
-            if(callbackCount >= 1){
-                res.render('update-owner', context);
-            }
 
-        }
-    });
-
-    router.put('/:id', function(req, res){
-        var mysql = req.app.get('mysql');
-        console.log(req.body)
-        console.log(req.params.id)
-        var sql = "UPDATE Owners SET firstName=?, lastName=?, email=?, phoneNumber=?, address1=?, address2=?, city=?, state=?, zipCode=? WHERE ownerID=?";
-        var inserts = [req.body.firstName, req.body.lastName, req.body.email, req.body.phoneNumber, req.body.address1, req.body.address2, req.body.city, req.body.state, req.body.zipCode, req.params.id];
-        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-            if(error){
-                console.log(error)
-                res.write(JSON.stringify(error));
-                res.end();
-            }else{
-                res.status(200);
-                res.end();
-            }
-        });
-    });
 
 
     /* Route to delete an owner, simply returns a 202 upon success. Ajax will handle this. */
@@ -147,7 +145,7 @@ module.exports = function(){
                 res.status(202).end();
             }
         })
-    })
+    });
 
     return router;
 }();
